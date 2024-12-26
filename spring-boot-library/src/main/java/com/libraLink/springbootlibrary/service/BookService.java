@@ -1,7 +1,7 @@
 package com.libraLink.springbootlibrary.service;
 
-import com.libraLink.springbootlibrary.dao.BookRepository;
-import com.libraLink.springbootlibrary.dao.CheckoutRepository;
+import com.libraLink.springbootlibrary.repository.BookRepository;
+import com.libraLink.springbootlibrary.repository.CheckoutRepository;
 import com.libraLink.springbootlibrary.entity.Book;
 import com.libraLink.springbootlibrary.entity.Checkout;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,6 @@ public class BookService {
         // Subtracting book available cause user borrow it
         book.get().setCopiesAvailable(book.get().getCopiesAvailable() - 1);
         bookRepository.save(book.get());
-
 
         Checkout checkout = new Checkout(userEmail,
                 LocalDate.now().toString(),

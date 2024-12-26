@@ -13,6 +13,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
     private String theAllowedOrigins = "http://localhost:3000";
 
+    // Disabling HTTP method for POST, PATCH, DELETE, PUT
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config,
                                                      CorsRegistry cors) {

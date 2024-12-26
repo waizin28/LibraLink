@@ -1,4 +1,4 @@
-package com.libraLink.springbootlibrary.dao;
+package com.libraLink.springbootlibrary.repository;
 
 import com.libraLink.springbootlibrary.entity.Checkout;
 import org.springframework.data.jpa.repository.JpaRepository;
