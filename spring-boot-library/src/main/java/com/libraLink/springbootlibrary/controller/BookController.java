@@ -41,10 +41,16 @@ public class BookController {
         return bookService.checkoutBook(userEmail, bookId);
     }
 
-    // Current loan service
+    // Return all books that have been checked out
     @GetMapping("/secure/currentloans")
     public List<ShelfCurrentLoansResponse> currentLoans(@RequestHeader(value = "Authorization")String token) throws Exception{
         String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
         return bookService.currentLoans(userEmail);
+    }
+
+    @GetMapping("/secure/return")
+    public void returnBook(@RequestHeader(value = "Authorization")String token, @RequestParam Long bookId) throws Exception{
+        String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
+        bookService.returnBook(userEmail, bookId);
     }
 }
