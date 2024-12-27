@@ -1,4 +1,5 @@
 import React from 'react';
+import Loans from './components/Loans';
 
 // Reference for tab: https://getbootstrap.com/docs/5.0/components/navs-tabs/
 const ShelfPage = () => {
@@ -43,7 +44,7 @@ const ShelfPage = () => {
             role='tabpanel'
             aria-labelledby='nav-loans-tab'
           >
-            <p>Loans</p>
+            <Loans />
           </div>
 
           {/* Will show all books that have been checked out and returned */}
