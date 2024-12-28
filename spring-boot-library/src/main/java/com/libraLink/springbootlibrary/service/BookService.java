@@ -115,4 +115,23 @@ public class BookService {
         // remove checkout history
         checkoutRepository.deleteById(validateCheckout.getId());
     }
+
+    public void renewLoan(String userEmail, Long bookId) throws Exception{
+        // make sure we have valid checkout
+        Checkout validateCheckout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+        if(validateCheckout == null){
+            throw new Exception("Book does not exist or not checked out by user");
+        }
+
+        // Make sure it's not pass due date
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d1 = sdf.parse(validateCheckout.getReturnDate());
+        Date d2 = sdf.parse(LocalDate.now().toString());
+
+        // Make sure return date is later than today date
+        if(d1.compareTo(d2) > 0 || d1.compareTo(d2) == 0){
+            validateCheckout.setCheckoutDate(LocalDate.now().plusDays(7).toString());
+            checkoutRepository.save(validateCheckout);
+        }
+    }
 }

@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react';
 import ShelfCurrentLoans from '../../../models/ShelfCurrentLoans';
 import { SpinnerLoading } from '../../Utils/SpinnerLoading';
 import { Link } from 'react-router-dom';
+import LoanModal from './LoanModal';
 
 const Loans = () => {
   const { authState } = useOktaAuth();
   const [httpError, setHttpError] = useState(null);
   const [isLoadingUserLoans, setIsLoadingUserLoans] = useState(true);
+  const [checkout, setCheckout] = useState(false);
 
   // Current Loans
   const [shelfCurrentLoans, setShelfCurrentLoans] = useState<
@@ -45,7 +47,7 @@ const Loans = () => {
     });
 
     window.scrollTo(0, 0);
-  }, [authState]);
+  }, [authState, checkout]);
 
   if (isLoadingUserLoans) {
     return <SpinnerLoading />;
@@ -57,6 +59,22 @@ const Loans = () => {
         <p>{httpError}</p>
       </div>
     );
+  }
+
+  async function returnBook(bookId: number) {
+    const url = `http://localhost:8080/api/books/secure/return/?bookId=${bookId}`;
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    };
+    const returnResponse = await fetch(url, requestOptions);
+    if (!returnResponse.ok) {
+      throw new Error('Something went wrong!');
+    }
+    setCheckout(!checkout);
   }
 
   return (
@@ -134,6 +152,11 @@ const Loans = () => {
                   </div>
                 </div>
                 <hr />
+                <LoanModal
+                  shelfCurrentLoan={shelfCurrentLoan}
+                  mobile={false}
+                  returnBook={returnBook}
+                />
               </div>
             ))}
           </>
@@ -217,8 +240,12 @@ const Loans = () => {
                     </Link>
                   </div>
                 </div>
-
                 <hr />
+                <LoanModal
+                  shelfCurrentLoan={shelfCurrentLoan}
+                  mobile={true}
+                  returnBook={returnBook}
+                />
               </div>
             ))}
           </>
