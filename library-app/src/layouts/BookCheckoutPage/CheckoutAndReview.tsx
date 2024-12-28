@@ -11,6 +11,7 @@ export const CheckoutAndReview: React.FC<{
   isCheckedOut: boolean;
   checkoutBook: any;
   isReviewLeft: boolean;
+  submitReview: any;
 }> = (props) => {
   function buttonRender() {
     if (props.isAuthenticated) {
@@ -44,11 +45,7 @@ export const CheckoutAndReview: React.FC<{
 
   function reviewRender() {
     if (props.isAuthenticated && !props.isReviewLeft) {
-      return (
-        <p>
-          <LeaveAReview />
-        </p>
-      );
+      return <LeaveAReview submitReview={props.submitReview} />;
     } else if (props.isAuthenticated && props.isReviewLeft) {
       return (
         <p>
