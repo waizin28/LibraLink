@@ -20,6 +20,10 @@ export const BookCheckoutPage = () => {
   const [totalStars, setTotalStars] = useState(0);
   const [isLoadingReview, setIsLoadingReview] = useState(true);
 
+  // has this user left review on this book
+  const [isReviewLeft, setIsReviewLeft] = useState(false);
+  const [isLoadingUserReview, setIsLoadingUserReview] = useState(true);
+
   // Loans count
   const [currentLoansCount, setCurrentLoansCount] = useState(0);
   const [isLoadingCurrentLoansCount, setIsLoadingCurrentLoansCount] =
@@ -33,7 +37,6 @@ export const BookCheckoutPage = () => {
   const bookId = window.location.pathname.split('/')[2];
 
   // To get each book
-
   useEffect(() => {
     const fetchBooks = async () => {
       const url: string = `http://localhost:8080/api/books/${bookId}`;
@@ -65,7 +68,7 @@ export const BookCheckoutPage = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
-  }, [isCheckedOut]);
+  }, [isCheckedOut, isReviewLeft]);
 
   // Getting reviews
   useEffect(() => {
@@ -115,6 +118,40 @@ export const BookCheckoutPage = () => {
       setHttpError(error.message);
     });
   }, [bookId]);
+
+  // g
+  useEffect(() => {
+    const fetchUserReviewBook = async () => {
+      if (authState && authState?.isAuthenticated) {
+        const url = `http://localhost:8080/api/reviews/secure/user/book/?bookId=${bookId}`;
+        const requestOptions = {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        };
+
+        const reviewResp = await fetch(url, requestOptions);
+
+        if (!reviewResp.ok) {
+          throw new Error('Something went wrong');
+        }
+
+        const reviewJson = await reviewResp.json();
+
+        if (reviewJson._embedded.reviews.length > 0) {
+          setIsReviewLeft(reviewJson);
+        }
+      }
+      setIsLoadingUserReview(false);
+    };
+
+    fetchUserReviewBook().catch((error: any) => {
+      setIsLoadingUserReview(false);
+      setHttpError(error.message);
+    });
+  }, [authState]);
 
   // Getting loan count
   useEffect(() => {
@@ -181,7 +218,8 @@ export const BookCheckoutPage = () => {
     isLoading ||
     isLoadingReview ||
     isLoadingCurrentLoansCount ||
-    isLoadingBookCheckedOut
+    isLoadingBookCheckedOut ||
+    isLoadingUserReview
   ) {
     return <SpinnerLoading />;
   }
@@ -204,14 +242,13 @@ export const BookCheckoutPage = () => {
       },
     };
 
-    const checkoutRep = await fetch(url,requestOptions);
+    const checkoutRep = await fetch(url, requestOptions);
 
-    if(!checkoutRep.ok){
-        throw new Error('Something went wrong');
+    if (!checkoutRep.ok) {
+      throw new Error('Something went wrong');
     }
 
     setIsCheckedOut(true);
-
   }
 
   return (
@@ -248,6 +285,7 @@ export const BookCheckoutPage = () => {
             isAuthenticated={authState?.isAuthenticated}
             isCheckedOut={isCheckedOut}
             checkoutBook={checkoutBook}
+            isReviewLeft={isReviewLeft}
           />
         </div>
         <hr />
@@ -283,6 +321,7 @@ export const BookCheckoutPage = () => {
           isAuthenticated={authState?.isAuthenticated}
           isCheckedOut={isCheckedOut}
           checkoutBook={checkoutBook}
+          isReviewLeft={isReviewLeft}
         />
         <hr />
         <LatestReviews reviews={reviews} bookId={book?.id} mobile={true} />

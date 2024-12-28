@@ -1,37 +1,68 @@
 import React from 'react';
 import BookModel from '../../models/BookModel';
 import { Link } from 'react-router-dom';
+import LeaveAReview from '../Utils/LeaveAReview';
 
 export const CheckoutAndReview: React.FC<{
-    book: BookModel | undefined, mobile: boolean, 
-    currentLoansCount: number, isAuthenticated: any, isCheckedOut: boolean, 
-    checkoutBook: any
+  book: BookModel | undefined;
+  mobile: boolean;
+  currentLoansCount: number;
+  isAuthenticated: any;
+  isCheckedOut: boolean;
+  checkoutBook: any;
+  isReviewLeft: boolean;
 }> = (props) => {
-
-    function buttonRender(){
-        if(props.isAuthenticated){
-            if(!props.isCheckedOut && props.currentLoansCount < 5){
-                return (
-                    <button onClick={() => props.checkoutBook()} className='btn btn-success btn-lg'>Checkout</button>
-                )
-            }else if(props.isCheckedOut){
-                return (
-                    <p>
-                        <b>Book checked out! Enjoy!</b>
-                    </p>
-                )
-            }else if(!props.isCheckedOut){
-                // checking for more than 5 books checkedout
-                return (
-                    <p className='text-danger'>
-                       Too many books checkedout!
-                    </p>
-                )
-            }else{
-                return <Link to='/login' className='btn btn-success btn-lg'>Sign In</Link>
-            }
-        }
+  function buttonRender() {
+    if (props.isAuthenticated) {
+      if (!props.isCheckedOut && props.currentLoansCount < 5) {
+        return (
+          <button
+            onClick={() => props.checkoutBook()}
+            className='btn btn-success btn-lg'
+          >
+            Checkout
+          </button>
+        );
+      } else if (props.isCheckedOut) {
+        return (
+          <p>
+            <b>Book checked out! Enjoy!</b>
+          </p>
+        );
+      } else if (!props.isCheckedOut) {
+        // checking for more than 5 books checkedout
+        return <p className='text-danger'>Too many books checkedout!</p>;
+      } else {
+        return (
+          <Link to='/login' className='btn btn-success btn-lg'>
+            Sign In
+          </Link>
+        );
+      }
     }
+  }
+
+  function reviewRender() {
+    if (props.isAuthenticated && !props.isReviewLeft) {
+      return (
+        <p>
+          <LeaveAReview />
+        </p>
+      );
+    } else if (props.isAuthenticated && props.isReviewLeft) {
+      return (
+        <p>
+          <b>Thank you for your review!</b>
+        </p>
+      );
+    }
+    return (
+      <div>
+        <hr />
+        <p>Sign in to be able to leave review.</p>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -69,7 +100,7 @@ export const CheckoutAndReview: React.FC<{
         <p className='mt-3'>
           This number can change until placing order has been complete.
         </p>
-        <p>Sign in to be able to leave review.</p>
+        {reviewRender()}
       </div>
     </div>
   );
