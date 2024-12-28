@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Loans from './components/Loans';
+import { HistoryPage } from './components/HistoryPage';
 
 // Reference for tab: https://getbootstrap.com/docs/5.0/components/navs-tabs/
 const ShelfPage = () => {
+  // Force history page to load when new history loaded
+  const [historyClick, setHistoryClick] = useState(false);
   return (
     <div className='container'>
       <div className='mt-3'>
@@ -17,6 +20,7 @@ const ShelfPage = () => {
               role='tab'
               aria-controls='nav-loans'
               aria-selected='true'
+              onClick={() => setHistoryClick(false)}
             >
               Loans
             </button>
@@ -30,6 +34,7 @@ const ShelfPage = () => {
               role='tab'
               aria-controls='nav-history'
               aria-selected='false'
+              onClick={() => setHistoryClick(true)}
             >
               Your History
             </button>
@@ -54,7 +59,7 @@ const ShelfPage = () => {
             role='tabpanel'
             aria-labelledby='nav-history-tab'
           >
-            <p>Checkout History</p>
+            {historyClick ? <HistoryPage /> : <></>}
           </div>
         </div>
       </div>
