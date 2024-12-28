@@ -129,8 +129,8 @@ public class BookService {
         Date d2 = sdf.parse(LocalDate.now().toString());
 
         // Make sure return date is later than today date
-        if(d1.compareTo(d2) > 0 || d1.compareTo(d2) == 0){
-            validateCheckout.setCheckoutDate(LocalDate.now().plusDays(7).toString());
+        if (d1.compareTo(d2) > 0 || d1.compareTo(d2) == 0) {
+            validateCheckout.setReturnDate(LocalDate.now().plusDays(7).toString());
             checkoutRepository.save(validateCheckout);
         }
     }
