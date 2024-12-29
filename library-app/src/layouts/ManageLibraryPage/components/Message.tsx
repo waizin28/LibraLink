@@ -10,6 +10,7 @@ const Message: React.FC<{
 
   function submitBtn() {
     if (props.message.id !== null && response !== '') {
+      // pass in the response from admin, id already comes from the id of user's question
       props.submitResponseToQuestion(props.message.id, response);
       setDisplayWarning(false);
     } else {
@@ -44,6 +45,7 @@ const Message: React.FC<{
                 rows={3}
                 onChange={(e) => setResponse(e.target.value)}
                 value={response}
+                placeholder='Enter your response here.'
               ></textarea>
             </div>
             <div>

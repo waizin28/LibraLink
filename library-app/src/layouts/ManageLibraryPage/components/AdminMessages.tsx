@@ -4,6 +4,7 @@ import MessageModel from '../../../models/MessageModel';
 import { SpinnerLoading } from '../../Utils/SpinnerLoading';
 import { Pagination } from '../../Utils/Pagination';
 import Message from './Message';
+import AdminMessageRequest from '../../../models/AdminMessageRequest';
 
 const AdminMessages = () => {
   const { authState } = useOktaAuth();
@@ -42,7 +43,7 @@ const AdminMessages = () => {
           throw new Error('Something went wrong!');
         }
         const messagesResponseJson = await messagesResponse.json();
-
+        console.log('Message response: ', messagesResponseJson);
         setMessages(messagesResponseJson._embedded.messages);
         setTotalPages(messagesResponseJson.page.totalPages);
       }
@@ -57,6 +58,7 @@ const AdminMessages = () => {
     window.scrollTo(0, 0);
   }, [authState, currentPage, btnSubmit]);
 
+  // making update to question asked by users
   async function submitResponseToQuestion(id: number, response: string) {
     const url = `http://localhost:8080/api/messages/secure/admin/message`;
     if (
@@ -80,6 +82,8 @@ const AdminMessages = () => {
       if (!messageAdminRequestModelResponse.ok) {
         throw new Error('Something went wrong!');
       }
+
+      // basically just to rerender when message is updated
       setBtnSubmit(!btnSubmit);
     }
   }
