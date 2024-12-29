@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BookModel from '../../../models/BookModel';
 import { SpinnerLoading } from '../../Utils/SpinnerLoading';
 import { Pagination } from '../../Utils/Pagination';
+import EditBook from './EditBook';
 
 const ChangeQuantityBooks = () => {
   const [books, setBooks] = useState<BookModel[]>([]);
@@ -91,9 +92,9 @@ const ChangeQuantityBooks = () => {
           <p>
             {indexOfFirstBook + 1} to {lastItem} of {totalAmountOfBooks} items:
           </p>
-          {/* {books.map(book => (
-                       <ChangeQuantityOfBook book={book} key={book.id} deleteBook={deleteBook}/>
-                    ))} */}
+          {books.map((book) => (
+            <EditBook book={book} key={book.id} deleteBook={deleteBook} />
+          ))}
         </>
       ) : (
         <h5>Add a book before changing quantity</h5>
