@@ -142,37 +142,29 @@ const AddNewBook = () => {
                   className='dropdown-menu'
                   aria-labelledby='dropdownMenuButton1'
                 >
-                  <li>
-                    <a
-                      onClick={() => categoryField('FE')}
-                      className='dropdown-item'
-                    >
-                      Front End
-                    </a>
+                  <li
+                    onClick={() => categoryField('FE')}
+                    className='dropdown-item'
+                  >
+                    Front End
                   </li>
-                  <li>
-                    <a
-                      onClick={() => categoryField('BE')}
-                      className='dropdown-item'
-                    >
-                      Back End
-                    </a>
+                  <li
+                    onClick={() => categoryField('BE')}
+                    className='dropdown-item'
+                  >
+                    Back End
                   </li>
-                  <li>
-                    <a
-                      onClick={() => categoryField('Data')}
-                      className='dropdown-item'
-                    >
-                      Data
-                    </a>
+                  <li
+                    onClick={() => categoryField('Data')}
+                    className='dropdown-item'
+                  >
+                    Data
                   </li>
-                  <li>
-                    <a
-                      onClick={() => categoryField('DevOps')}
-                      className='dropdown-item'
-                    >
-                      DevOps
-                    </a>
+                  <li
+                    onClick={() => categoryField('DevOps')}
+                    className='dropdown-item'
+                  >
+                    DevOps
                   </li>
                 </ul>
               </div>

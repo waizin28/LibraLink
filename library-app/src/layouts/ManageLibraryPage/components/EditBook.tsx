@@ -15,6 +15,7 @@ const EditBook: React.FC<{ book: BookModel; deleteBook: any }> = (props) => {
         : setRemaining(0);
     };
     fetchBookInState();
+    // eslint-disable-next-line
   }, []);
 
   // Increase books that can be lend out

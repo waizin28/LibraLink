@@ -57,6 +57,7 @@ const ChangeQuantityBooks = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
+    // eslint-disable-next-line
   }, [currentPage, bookDelete]);
 
   const indexOfLastBook: number = currentPage * booksPerPage;
