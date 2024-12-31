@@ -17,7 +17,7 @@ public class AdminService {
 
     private BookRepository bookRepository;
     private ReviewRepository reviewRepository;
-    private CheckoutRepository checkoutRepository
+    private CheckoutRepository checkoutRepository;
 
     @Autowired
     public AdminService(BookRepository bookRepository, ReviewRepository reviewRepository, CheckoutRepository checkoutRepository) {
