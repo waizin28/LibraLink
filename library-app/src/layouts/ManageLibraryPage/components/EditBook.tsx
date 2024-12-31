@@ -128,7 +128,7 @@ const EditBook: React.FC<{ book: BookModel; deleteBook: any }> = (props) => {
           </div>
         </div>
         <button
-          className='m1 btn btn-md main-color text-white'
+          className='m1 btn btn-md main-color text-white mb-2'
           onClick={increaseQuantity}
         >
           Add Quantity
