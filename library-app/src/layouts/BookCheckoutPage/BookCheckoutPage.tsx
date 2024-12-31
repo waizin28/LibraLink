@@ -69,6 +69,7 @@ export const BookCheckoutPage = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
+    // eslint-disable-next-line
   }, [isCheckedOut]);
 
   // Getting all reviews for a book
@@ -118,6 +119,7 @@ export const BookCheckoutPage = () => {
       setIsLoadingReview(false);
       setHttpError(error.message);
     });
+    // eslint-disable-next-line
   }, [isReviewLeft]);
 
   // see if the user has left a review on this specific book
@@ -146,6 +148,7 @@ export const BookCheckoutPage = () => {
       setIsLoadingUserReview(false);
       setHttpError(error.message);
     });
+    // eslint-disable-next-line
   }, [authState]);
 
   // Getting loan count
@@ -178,6 +181,7 @@ export const BookCheckoutPage = () => {
       setIsLoadingCurrentLoansCount(false);
       setHttpError(error.message);
     });
+    // eslint-disable-next-line
   }, [authState, isCheckedOut]);
 
   useEffect(() => {
@@ -207,6 +211,7 @@ export const BookCheckoutPage = () => {
       setIsLoadingBookCheckedOut(false);
       setHttpError(err.message);
     });
+    // eslint-disable-next-line
   }, [authState]);
 
   if (

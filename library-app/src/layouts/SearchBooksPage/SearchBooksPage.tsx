@@ -73,6 +73,7 @@ export const SearchBooksPage = () => {
 
     // currentPage -> for pagination
     // searchUrl -> when searching with search bar
+    // eslint-disable-next-line
   }, [currentPage, searchUrl]);
 
   if (isLoading) {

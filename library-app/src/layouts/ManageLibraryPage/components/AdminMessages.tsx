@@ -56,6 +56,7 @@ const AdminMessages = () => {
     });
 
     window.scrollTo(0, 0);
+    // eslint-disable-next-line
   }, [authState, currentPage, btnSubmit]);
 
   // making update to question asked by users

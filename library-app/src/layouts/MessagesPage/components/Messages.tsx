@@ -45,6 +45,7 @@ const Messages = () => {
       setHttpError(error.messages);
     });
     window.scrollTo(0, 0);
+    // eslint-disable-next-line
   }, [authState, currentPage]);
 
   if (isLoadingMessages) {
