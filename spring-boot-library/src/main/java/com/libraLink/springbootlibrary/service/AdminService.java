@@ -43,4 +43,16 @@ public class AdminService {
         book.get().setCopies(book.get().getCopies()+1);
         bookRepository.save(book.get());
     }
+
+    public void decreaseBookQuantity(Long bookId) throws Exception{
+        Optional<Book> book = bookRepository.findById(bookId);
+
+        if(!book.isPresent()){
+            throw new Exception("Book was not found");
+        }
+
+        book.get().setCopiesAvailable(book.get().getCopiesAvailable() - 1);
+        book.get().setCopies(book.get().getCopies()-1);
+        bookRepository.save(book.get());
+    }
 }
