@@ -32,6 +32,7 @@ const EditBook: React.FC<{ book: BookModel; deleteBook: any }> = (props) => {
     if (!quantityUpdateResponse.ok) {
       throw new Error('Something went wrong!');
     }
+    // Update state to refresh the page
     setQuantity(quantity + 1);
     setRemaining(remaining + 1);
   }
@@ -51,6 +52,8 @@ const EditBook: React.FC<{ book: BookModel; deleteBook: any }> = (props) => {
     if (!quantityUpdateResponse.ok) {
       throw new Error('Something went wrong!');
     }
+
+    // Update state to refresh the page
     setQuantity(quantity - 1);
     setRemaining(remaining - 1);
   }
