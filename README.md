@@ -1,7 +1,3 @@
-Here's an improved README for **LibraLink**, incorporating details from your description:  
-
----
-
 # 📚 LibraLink  
 
 LibraLink is a dynamic book checkout platform designed for users to explore a curated selection of **computer science books**. Users can browse, filter books by name or category, leave reviews, check out books, and even request new additions from the admin.  
