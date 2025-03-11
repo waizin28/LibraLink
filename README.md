@@ -22,13 +22,13 @@ LibraLink is a dynamic book checkout platform designed for users to explore a cu
    ```
 2. Install frontend dependencies and start the development server:  
    ```sh
-   cd frontend
+   cd library-app
    npm install
    npm start
    ```
 3. Set up and run the backend:  
    ```sh
-   cd backend
+   cd spring-boot-library
    ./mvnw spring-boot:run
    ```
 4. Configure **Okta authentication** for secure access  
