@@ -38,7 +38,3 @@ LibraLink is a dynamic book checkout platform designed for users to explore a cu
 
 ## 📄 License  
 This project is open-source and available under the **MIT License**.  
-
----
-
-Let me know if you'd like any modifications! 🚀
